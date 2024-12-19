@@ -8,6 +8,7 @@ import BannerSection from './views/BannerSection.vue'
 import UniformSection from './views/UniformSection.vue'
 import ItemSection from './views/ItemSection.vue'
 import CounterSection from './views/CounterSection.vue'
+import PedsSection from './views/PedsSection.vue'
 </script>
 
 #070D1DB2
@@ -17,6 +18,7 @@ import CounterSection from './views/CounterSection.vue'
   <UniformSection />
   <ItemSection />
   <CounterSection />
+  <PedsSection /> 
   <FooterSection />
   <RouterView />
 </template>

@@ -13,7 +13,6 @@
                <img alt="Arma" class="gun" src="@/assets/arma3.png"/>
                <img alt="Arma" class="gun" src="@/assets/arma4.png"/>
                <img alt="Arma" class="gun" src="@/assets/arma3.png"/>
-
             </div>
          </div>
       </div>

@@ -90,6 +90,8 @@
   }
   .counter_left{
     width: 100%;
+    padding: 50px 0; 
+
   }
   }
 

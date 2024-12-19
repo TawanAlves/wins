@@ -3,11 +3,13 @@ import { RouterLink, RouterView } from 'vue-router'
 import HeaderSection from './components/HeaderSection.vue'
 import FooterSection from './components/FooterSection.vue'
 
+import ItemSection from './views/ItemSection.vue'
 import CounterSection from './views/CounterSection.vue'
 </script>
 
 <template>  
   <HeaderSection />
+  <ItemSection />
   <CounterSection />
   <FooterSection />
   <RouterView />

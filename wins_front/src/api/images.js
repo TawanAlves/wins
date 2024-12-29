@@ -1,15 +1,15 @@
-import { imageBaseURL } from './modules'
+import { imageBaseURL } from '@/helpers/axios.js'
+import { get } from './modules'
 
 export default {
-  getPeds(item) {
-    return imageBaseURL.get(`peds/${item}`)
+  getPed(item) {
+    return get(imageBaseURL, `peds/${item}.webp`)
   },
 
   getUniform(item) {
-    return imageBaseURL.get(`uniforms/${item}`)
+    return get(imageBaseURL, `uniforms/${item}.webp`)
   },
-
-  getWeapons(item) {
-    return imageBaseURL.get(`weapons/${item}`)
+  getWeapon(item) {
+    return get(imageBaseURL, `weapons/${item}.webp`)
   },
 }

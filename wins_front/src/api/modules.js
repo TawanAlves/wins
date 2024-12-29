@@ -1,20 +1,17 @@
-import axios from '@/helpers/axios.js'
-
-// Métodos do axios
-function get(url, params) {
-  return axios.get(url, { params: params })
+function get(axiosInstance, url, params) {
+  return axiosInstance.get(url, { params })
 }
 
-function post(url, data) {
-  return axios.post(url, data)
+function post(axiosInstance, url, data) {
+  return axiosInstance.post(url, data)
 }
 
-function put(url, data) {
-  return axios.put(url, data)
+function put(axiosInstance, url, data) {
+  return axiosInstance.put(url, data)
 }
 
-function del(url) {
-  return axios.delete(url)
+function del(axiosInstance, url) {
+  return axiosInstance.delete(url)
 }
 
 export { get, post, put, del }

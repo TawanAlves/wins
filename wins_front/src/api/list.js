@@ -1,15 +1,15 @@
-import { listBaseURL } from './modules'
+import { listBaseURL } from '@/helpers/axios.js'
+import { get } from './modules'
 
 export default {
   getAllPeds() {
-    return listBaseURL.get(`peds/`)
+    return get(listBaseURL, `peds`)
   },
 
   getAllUniforms() {
-    return listBaseURL.get(`uniforms/`)
+    return get(listBaseURL, `uniforms`)
   },
-
   getAllWeapons() {
-    return listBaseURL.get(`weapons/`)
+    return get(listBaseURL, `weapons`)
   },
 }

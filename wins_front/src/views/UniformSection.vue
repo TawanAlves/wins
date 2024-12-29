@@ -1,10 +1,12 @@
 <template>
   <section>
       <div class="nav">
-         <a href="#">Caixas</a>
+         <a href="#" class="other"> Caixas</a>
          <a href="#" class="a_uniform">Uniforme</a>
-         <a href="#">Seleção</a>
+         <a href="#" class="other">Seleção</a>
       </div>
+      
+      
       <div class="uniform_container">
          <div class="uniform_container_header">
             <h1>Uniforme</h1> 
@@ -14,6 +16,7 @@
                <option value="lendário">Landario</option>               
             </select>
          </div>
+
          <div class="uniform_content">
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
@@ -21,21 +24,83 @@
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
             
-            <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
+            <!-- <img alt="uniforme" class="uniform" src="https://wins.company/assets/TesteFrontEnd/uniforms/SETCOMGAM0009-F.webp" > -->
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >
             <img alt="uniforme" class="uniform" src="@/assets/uniform.png" >         
+
+            <img v-for="uniform in uniforms" :key="uniform.name" :alt="uniform.name" class="uniform" :src="uniform.imageUrl">
            
          </div>
+         <!-- <div class="uniform_content">
+            <img alt="uniforme" class="uniform" src="https://wins.company/assets/TesteFrontEnd/uniforms/SETCOMGAM0009-F.webp" >
+            <img v-for="uniform in uniformDetails" :key="uniform.name" :alt="uniform.name" class="uniform" :src="uniform.imageUrl">
+         </div>
+         <p>{{this.uniformDetails}}</p> -->
       </div>
   </section>
 </template>
 
 <script>
+    import api from "@/api/api.js";
+
    export default {
-      
-   }
+      data(){
+         return{
+            uniforms: [], 
+            firstImageNames: [],
+            uniformDetails: []   
+         };
+      },
+
+      mounted() {
+         this.getAllUniforms();
+         // this.getUni();
+      },
+   methods: {
+    
+    
+      async getAllUniforms() {
+
+         // api.getAllUniforms()
+         // .then(response => console.log(response.data))
+         // .catch(error => console.error('Erro:', error));
+            try {
+            const getAllUniforms = await api.getAllUniforms();
+            this.uniforms = getAllUniforms.data;
+            
+            this.firstImageNames = this.uniforms.map(uniform => uniform.images[0]);
+
+            for (let i = 0; i < this.firstImageNames.length; i++) {
+               const name = this.firstImageNames[i];
+               const response = await api.getUniform(name);
+
+               const imageUrl = response.data;             
+               this.uniformDetails.push({ name, imageUrl });
+               
+            }         
+            } catch (error) {
+            console.log(error);
+            }
+         },
+
+         // async getUniforms() {
+
+         // api.getUniform(`NOME`)
+         // .then(response => console.log(response.data))
+         // .catch(error => console.error('Erro:', error));    
+
+         // api.getAllPeds()
+         // .then(response => console.log(response.data))
+         // .catch(error => console.error('Erro:', error));
+
+         // api.getAllWeapons()
+         // .then(response => console.log(response.data))
+         // .catch(error => console.error('Erro:', error));
+
+    }
+}  
 </script>
 
 <style scoped>
@@ -44,10 +109,10 @@
       backdrop-filter: blur(154px);
       padding: 160px;
       color: #ffffff;
-
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: center;      
+      margin-top: -42px; 
    }
 
    .uniform_content{
@@ -75,10 +140,13 @@
    .nav{
       display: flex; 
       gap: 11px;
-      padding: 30px 140px;
+      padding: 0 140px;
       background-color: #15223F;
       max-width: 600px;
       align-self:center ;
+   }
+   .other, .a_uniform{
+      padding: 30px 0;
    }
 
    a{
@@ -86,9 +154,9 @@
       text-decoration: none;
       color: #ffffff !important;      
    }
-   /* .a_uniform{
-      border-bottom: 8px solid #FF1A6C;
-   } */
+   .a_uniform{
+      border-bottom: 3px solid #FF1A6C;
+   }
    h1{
       font-weight: 700;
       font-size: 32px;
@@ -117,7 +185,7 @@
 
 
 @media (max-width: 481px){
-   .nav{padding: 30px 30px;}
+   .nav{padding: 0 30px;}
    .uniform_container_header{
       flex-direction: column;
       row-gap: 20px;
